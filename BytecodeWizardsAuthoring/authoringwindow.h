@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include "canvaswidget.h"
+#include "Widgets/IAuthoringWidget.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class AuthoringWindow; }
 QT_END_NAMESPACE
@@ -15,7 +18,14 @@ public:
     AuthoringWindow(QWidget *parent = nullptr);
     ~AuthoringWindow();
 
+    void Generate(IAuthoringWidget* rootWidget);
+
+public slots:
+    void onGenerate();
+
 private:
     Ui::AuthoringWindow *ui;
+
+    CanvasWidget* canvas;
 };
 #endif // AUTHORINGWINDOW_H

@@ -3,7 +3,9 @@
 
 #include <QWidget>
 
-#include "Widgets/IAuthoringWidget.h"
+#include "Widgets/Iauthoringwidget.h"
+
+enum MoveMode { WIDGET_MOVE, CONNECTOR_MOVE };
 
 class CanvasWidget : public QWidget
 {
@@ -27,6 +29,8 @@ private:
     IAuthoringWidget *rootWidget = NULL;
 
     IAuthoringWidget *selectedWidget = NULL;
+
+    MoveMode moveMode = MoveMode::WIDGET_MOVE;
 
     QPoint widgetSelectionOffset;
 

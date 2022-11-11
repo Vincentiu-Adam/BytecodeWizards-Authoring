@@ -83,14 +83,32 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
     bool found = false;
     while (!found && currentWidget != NULL)
     {
-        found = currentWidget->Contains(mousePos);
+        bool inWidget = currentWidget->Contains(mousePos);
+        bool inExitConnector = currentWidget->ContainsExitConnector(mousePos);
+
+        found = inWidget || inExitConnector;
         if (found)
         {
             selectedWidget = currentWidget;
 
-            //set position offset based on mouse offset
-            widgetSelectionOffset = mousePos - selectedWidget->GetPosition();
-            qDebug("Found widget");
+            //check if we didn't click on the exit connector instead
+            if (inExitConnector)
+            {
+                moveMode = MoveMode::CONNECTOR_MOVE;
+                qDebug("Found exit connector");
+
+                //create a line that we will move via mouse cursor
+                selectedWidget->CreateExitConnectorLine();
+            }
+            else
+            {
+                //if we did not click on the connector move widget instead
+                moveMode = MoveMode::WIDGET_MOVE;
+                qDebug("Found widget");
+
+                //set position offset based on mouse offset
+                widgetSelectionOffset = mousePos - selectedWidget->GetPosition();
+            }
         }
 
         currentWidget = currentWidget->next;
@@ -99,6 +117,36 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
 
 void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
 {
+    //if in connector move mode, check if we released on another widget exit node and link to that
+    if (selectedWidget != NULL && moveMode == MoveMode::CONNECTOR_MOVE)
+    {
+        QPoint mousePos = event->pos();
+
+        //check if we contain some instruction
+        IAuthoringWidget* currentWidget = rootWidget;
+
+        bool found = false;
+        while (!found && currentWidget != NULL)
+        {
+            found = currentWidget != selectedWidget && currentWidget->ContainsEntryConnector(mousePos);
+            if (found)
+            {
+                currentWidget->SetEntryConnectorLine(selectedWidget->GetExitConnectorLine());
+            }
+
+            currentWidget = currentWidget->next;
+        }
+
+        //if we did not release on any exit node then just remove the line
+        if (!found)
+        {
+            selectedWidget->SetExitLineEndPos(QPoint(-1,-1));
+
+            //line deleted repaint
+            repaint();
+        }
+    }
+
     //released mouse; release widget
     selectedWidget = NULL;
 }
@@ -113,9 +161,23 @@ void CanvasWidget::mouseMoveEvent(QMouseEvent *event)
 
     if (selectedWidget != NULL)
     {
-        //set widget position based on offset
-        QPoint movePos = mousePos - widgetSelectionOffset;
-        selectedWidget->Move(movePos);
+        switch (moveMode)
+        {
+            case MoveMode::WIDGET_MOVE:
+            {
+                //set widget position based on offset
+                QPoint movePos = mousePos - widgetSelectionOffset;
+                selectedWidget->Move(movePos);
+
+                break;
+            }
+
+            case MoveMode::CONNECTOR_MOVE:
+            {
+                selectedWidget->SetExitLineEndPos(mousePos);
+                break;
+            }
+        }
 
         //widget moved repaint
         repaint();

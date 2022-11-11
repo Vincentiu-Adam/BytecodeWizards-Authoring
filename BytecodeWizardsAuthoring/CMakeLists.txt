@@ -23,6 +23,7 @@ set(PROJECT_SOURCES
         Widgets/Iauthoringwidget.h
         Widgets/simpleinstruction.h Widgets/simpleinstruction.cpp
         Widgets/baseinstructionwidget.h Widgets/baseinstructionwidget.cpp
+        Misc/linesegment.h Misc/linesegment.cpp
         canvaswidget.h canvaswidget.cpp
 )
 

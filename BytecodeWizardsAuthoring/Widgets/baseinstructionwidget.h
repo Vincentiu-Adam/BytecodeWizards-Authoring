@@ -2,17 +2,28 @@
 #define BASEINSTRUCTIONWIDGET_H
 
 #include "Iauthoringwidget.h"
+#include "Misc/linesegment.h"
 
 class BaseInstructionWidget : public IAuthoringWidget
 {
 public:
     BaseInstructionWidget(const QPoint& startPosition, const QString& instructionTitle);
+    ~BaseInstructionWidget();
 
     virtual void Draw(QPainter& painter) override;
 
     bool Contains(const QPoint& pos) override;
+    bool ContainsEntryConnector(const QPoint& pos) override;
+    bool ContainsExitConnector(const QPoint& pos) override;
+
+    void CreateExitConnectorLine() override;
+    void SetEntryConnectorLine(LineSegment* const lineSegment) override;
+
+    inline LineSegment* GetExitConnectorLine() const override { return exitLine; };
 
     void Move(const QPoint& newPos) override;
+
+    void SetExitLineEndPos(const QPoint& endPos) override;
 
     inline QPoint GetPosition() const override { return position; };
 
@@ -31,6 +42,9 @@ private:
     QPoint position;
 
     QString title;
+
+    LineSegment* entryLine = NULL;
+    LineSegment* exitLine = NULL;
 
     void DrawEntryConnectorShape(QPainterPath& path, const QPoint& position);
     void DrawExitConnectorShape(QPainterPath& path, const QPoint& position);

@@ -12,6 +12,21 @@ BaseInstructionWidget::BaseInstructionWidget(const QPoint& startPosition, const 
     title = instructionTitle;
 }
 
+BaseInstructionWidget::~BaseInstructionWidget()
+{
+    delete exitLine;
+    exitLine = NULL;
+    entryLine = NULL;
+
+    //if we have a next widget, set their entry line to null
+    if (next != NULL)
+    {
+        next->SetEntryConnectorLine(NULL);
+    }
+
+    next = NULL;
+}
+
 bool BaseInstructionWidget::Contains(const QPoint& pos)
 {
     //simple check inside rect bounds, no rotation shenanigans
@@ -23,9 +38,84 @@ bool BaseInstructionWidget::Contains(const QPoint& pos)
     return true;
 }
 
+bool BaseInstructionWidget::ContainsEntryConnector(const QPoint& pos)
+{
+    QPoint entryConnectorPosition = position + QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5);
+
+    //simple check inside rect bounds, no rotation shenanigans
+    if (pos.x() < entryConnectorPosition.x() - CONNECTOR_SIZE * 1.25 || pos.x() > entryConnectorPosition.x() + CONNECTOR_SIZE * 0.25 || pos.y() < entryConnectorPosition.y() - CONNECTOR_SIZE || pos.y() > entryConnectorPosition.y() + CONNECTOR_SIZE)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool BaseInstructionWidget::ContainsExitConnector(const QPoint& pos)
+{
+    QPoint exitConnectorPosition = position + QPoint(CONNECTOR_SIZE * 0.5 + WIDTH - CONNECTOR_MARGIN_X, CONNECTOR_MARGIN_Y + HEIGHT * 0.5);
+
+    //simple check inside rect bounds, no rotation shenanigans
+    if (pos.x() < exitConnectorPosition.x() - CONNECTOR_SIZE * 1.25 || pos.x() > exitConnectorPosition.x() + CONNECTOR_SIZE * 0.25 + CONNECTOR_SIZE || pos.y() < exitConnectorPosition.y() - CONNECTOR_SIZE || pos.y() > exitConnectorPosition.y() + CONNECTOR_SIZE)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void BaseInstructionWidget::CreateExitConnectorLine()
+{
+    //remove previous line if exists and create a new one
+    SetExitLineEndPos(QPoint(-1,-1));
+
+    QPoint exitConnectorPosition = position + QPoint(CONNECTOR_SIZE * 0.5 + WIDTH - CONNECTOR_MARGIN_X, CONNECTOR_MARGIN_Y + HEIGHT * 0.5);
+    exitLine = new LineSegment(exitConnectorPosition);
+}
+
+void BaseInstructionWidget::SetEntryConnectorLine(LineSegment* const lineSegment)
+{
+    entryLine = lineSegment;
+}
+
 void BaseInstructionWidget::Move(const QPoint& newPos)
 {
+
     position = newPos;
+
+    //widget moved we need to update line pos as well
+    QPoint connectorPosition;
+    if (entryLine != NULL)
+    {
+        connectorPosition = position + QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5);
+        entryLine->SetEndPoint(connectorPosition);
+    }
+
+    if (exitLine != NULL)
+    {
+        connectorPosition = position + QPoint(CONNECTOR_SIZE * 0.5 + WIDTH - CONNECTOR_MARGIN_X, CONNECTOR_MARGIN_Y + HEIGHT * 0.5);
+        exitLine->SetStartPoint(connectorPosition);
+    }
+}
+
+void BaseInstructionWidget::SetExitLineEndPos(const QPoint& endPos)
+{
+    //clear line if end pos is negative
+    if (endPos.x() == -1)
+    {
+        delete exitLine;
+        exitLine = NULL;
+
+        //if we have a next widget, set their entry line to null
+        if (next != NULL)
+        {
+            next->SetEntryConnectorLine(NULL);
+        }
+
+        return;
+    }
+
+    exitLine->SetEndPoint(endPos);
 }
 
 void BaseInstructionWidget::Draw(QPainter& painter)
@@ -52,20 +142,6 @@ void BaseInstructionWidget::Draw(QPainter& painter)
     painter.fillPath(roundedRectPath, blueRoundedBrush);
     painter.drawPath(roundedRectPath);
 
-    //draw connectors
-    roundedRectPath.clear();
-
-    rectPosition += QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5); //left connector
-    DrawEntryConnectorShape(roundedRectPath, rectPosition);
-
-    rectPosition += QPoint(WIDTH - CONNECTOR_MARGIN_X * 2, 0); //right connector
-    DrawExitConnectorShape(roundedRectPath, rectPosition);
-
-    blueRoundedBrush.setColor(Qt::gray);
-
-    painter.fillPath(roundedRectPath, blueRoundedBrush);
-    painter.drawPath(roundedRectPath);
-
     //draw instruction title
     QFont sizedFont = painter.font();
     sizedFont.setPointSize(FONT_SIZE);
@@ -79,6 +155,37 @@ void BaseInstructionWidget::Draw(QPainter& painter)
 
     textPosition += QPoint((WIDTH - textWidth) * 0.5f , TITLE_MARGING_TOP); //offset text
     painter.drawText(textPosition, title);
+
+    //draw exit line if exists
+    if (exitLine != NULL)
+    {
+        exitLine->Draw(painter);
+    }
+
+    //draw connectors
+    roundedRectPath.clear();
+
+    //make sure to reset pen since draw line might ovewrite
+    painter.setPen(blackBorderPen);
+
+    rectPosition += QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5); //left connector
+    DrawEntryConnectorShape(roundedRectPath, rectPosition);
+
+    //draw entry red
+    blueRoundedBrush.setColor(Qt::red);
+
+    painter.fillPath(roundedRectPath, blueRoundedBrush);
+    painter.drawPath(roundedRectPath);
+
+    roundedRectPath.clear();
+
+    rectPosition += QPoint(WIDTH - CONNECTOR_MARGIN_X * 2, 0); //right connector
+    DrawExitConnectorShape(roundedRectPath, rectPosition);
+
+    blueRoundedBrush.setColor(Qt::gray);
+
+    painter.fillPath(roundedRectPath, blueRoundedBrush);
+    painter.drawPath(roundedRectPath);
 
     //restore original hints
     painter.setRenderHints(previousHints);

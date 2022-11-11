@@ -1,6 +1,6 @@
 #include "simpleinstruction.h"
 
-SimpleInstruction::SimpleInstruction()
+SimpleInstruction::SimpleInstruction(const QPoint& startPosition) : BaseInstructionWidget(startPosition, "GET_HEALTH")
 {
 
 }
@@ -8,11 +8,6 @@ SimpleInstruction::SimpleInstruction()
 void SimpleInstruction::Generate(QByteArray& bytecode)
 {
     bytecode.append(0x0A);
-}
-
-void SimpleInstruction::Draw()
-{
-
 }
 
 SimpleInstruction::~SimpleInstruction()

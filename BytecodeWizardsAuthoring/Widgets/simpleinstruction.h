@@ -1,19 +1,17 @@
 #ifndef SIMPLEINSTRUCTION_H
 #define SIMPLEINSTRUCTION_H
 
-#include "IAuthoringWidget.h"
+#include "baseinstructionwidget.h"
 
 #include <QByteArray>
 
-class SimpleInstruction : public IAuthoringWidget
+class SimpleInstruction : public BaseInstructionWidget
 {
 public:
-    SimpleInstruction();
+    SimpleInstruction(const QPoint& startPosition);
     ~SimpleInstruction() override;
 
-    void Generate(QByteArray& bytecode) override;
-
-    void Draw() override;
+    void Generate(QByteArray& bytecode) override;  
 };
 
 #endif // SIMPLEINSTRUCTION_H

@@ -20,8 +20,9 @@ set(PROJECT_SOURCES
         authoringwindow.cpp
         authoringwindow.h
         authoringwindow.ui
-        Widgets/IAuthoringWidget.h
+        Widgets/Iauthoringwidget.h
         Widgets/simpleinstruction.h Widgets/simpleinstruction.cpp
+        Widgets/baseinstructionwidget.h Widgets/baseinstructionwidget.cpp
         canvaswidget.h canvaswidget.cpp
 )
 

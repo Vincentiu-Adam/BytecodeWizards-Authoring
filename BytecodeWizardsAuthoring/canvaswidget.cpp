@@ -54,10 +54,18 @@ void CanvasWidget::paintEvent(QPaintEvent *event)
 
     QPainter painter;
     painter.begin(this);
-        QBrush blackBrush(QColorConstants::White);
-        painter.setBackground(blackBrush);
+        QBrush whiteBrush(Qt::white);
+        painter.setBackground(whiteBrush);
 
-        painter.fillRect(0, 0, width(), height(), blackBrush);
+        painter.fillRect(0, 0, width(), height(), whiteBrush);
+
+        //paint all the widgets
+        IAuthoringWidget* currentWidget = rootWidget;
+        while (currentWidget != NULL)
+        {
+            currentWidget->Draw(painter);
+            currentWidget = currentWidget->next;
+        }
 
     painter.end();
 }
@@ -74,6 +82,11 @@ void CanvasWidget::onSimpleInstructionClicked()
 {
     qDebug("Simple instruction here?");
 
-    SimpleInstruction* simpleInstruction = new SimpleInstruction();
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    SimpleInstruction* simpleInstruction = new SimpleInstruction(canvasCenter);
     AddWidget(simpleInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
 }

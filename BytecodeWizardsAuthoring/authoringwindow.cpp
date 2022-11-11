@@ -14,6 +14,8 @@ AuthoringWindow::AuthoringWindow(QWidget *parent)
     //connect slots
     QObject::connect(ui->simpleInstruction, &QPushButton::clicked, ui->canvas, &CanvasWidget::onSimpleInstructionClicked);
     QObject::connect(ui->setLiteral, &QPushButton::clicked, this, &AuthoringWindow::onGenerate);
+
+
 }
 
 void AuthoringWindow::Generate(IAuthoringWidget* rootWidget)

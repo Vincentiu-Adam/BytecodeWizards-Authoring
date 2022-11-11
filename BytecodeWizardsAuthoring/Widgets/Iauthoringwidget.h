@@ -13,6 +13,12 @@ public:
     virtual void Draw(QPainter& painter) = 0;
     virtual void Generate(QByteArray& bytecode) = 0;
 
+    virtual bool Contains(const QPoint& pos) = 0;
+
+    virtual void Move(const QPoint& newPos) = 0;
+
+    virtual QPoint GetPosition() const = 0;
+
     virtual ~IAuthoringWidget() {};
 };
 

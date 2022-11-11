@@ -10,6 +10,12 @@ public:
 
     virtual void Draw(QPainter& painter) override;
 
+    bool Contains(const QPoint& pos) override;
+
+    void Move(const QPoint& newPos) override;
+
+    inline QPoint GetPosition() const override { return position; };
+
 private:
     const int WIDTH                 = 120;
     const int HEIGHT                = 60;

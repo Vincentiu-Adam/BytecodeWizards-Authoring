@@ -12,6 +12,22 @@ BaseInstructionWidget::BaseInstructionWidget(const QPoint& startPosition, const 
     title = instructionTitle;
 }
 
+bool BaseInstructionWidget::Contains(const QPoint& pos)
+{
+    //simple check inside rect bounds, no rotation shenanigans
+    if (pos.x() < position.x() || pos.x() > position.x() + WIDTH || pos.y() < position.y() || pos.y() > position.y() + HEIGHT)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+void BaseInstructionWidget::Move(const QPoint& newPos)
+{
+    position = newPos;
+}
+
 void BaseInstructionWidget::Draw(QPainter& painter)
 {
     //use painter to draw a rect at pos

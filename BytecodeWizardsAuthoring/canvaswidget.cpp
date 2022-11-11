@@ -76,6 +76,50 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
 
     QPoint mousePos = event->pos();
     qDebug("At position %d %d", mousePos.x(), mousePos.y());
+
+    //check if we contain some instruction
+    IAuthoringWidget* currentWidget = rootWidget;
+
+    bool found = false;
+    while (!found && currentWidget != NULL)
+    {
+        found = currentWidget->Contains(mousePos);
+        if (found)
+        {
+            selectedWidget = currentWidget;
+
+            //set position offset based on mouse offset
+            widgetSelectionOffset = mousePos - selectedWidget->GetPosition();
+            qDebug("Found widget");
+        }
+
+        currentWidget = currentWidget->next;
+    }
+}
+
+void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    //released mouse; release widget
+    selectedWidget = NULL;
+}
+
+void CanvasWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    //only gets called when mouse is pressed and held
+    qDebug("Mouse moved");
+
+    QPoint mousePos = event->pos();
+    qDebug("At position %d %d", mousePos.x(), mousePos.y());
+
+    if (selectedWidget != NULL)
+    {
+        //set widget position based on offset
+        QPoint movePos = mousePos - widgetSelectionOffset;
+        selectedWidget->Move(movePos);
+
+        //widget moved repaint
+        repaint();
+    }
 }
 
 void CanvasWidget::onSimpleInstructionClicked()

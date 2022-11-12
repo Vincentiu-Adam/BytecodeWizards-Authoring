@@ -4,10 +4,10 @@
 #include <QMouseEvent>
 #include <QDragMoveEvent>
 
-#include "Widgets/simpleinstruction.h"
-#include "Widgets/valueinstruction.h"
-#include "Widgets/singlevalueinstruction.h"
-#include "Widgets/doublevalueinstruction.h"
+#include "Widgets/Base/simpleinstruction.h"
+#include "Widgets/Base/valueinstruction.h"
+#include "Widgets/Base/singlevalueinstruction.h"
+#include "Widgets/Base/doublevalueinstruction.h"
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 {
@@ -208,7 +208,7 @@ void CanvasWidget::onSimpleInstructionClicked()
 
     QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
 
-    SimpleInstruction* simpleInstruction = new SimpleInstruction(canvasCenter);
+    SimpleInstruction* simpleInstruction = new SimpleInstruction(canvasCenter, "GET_HEALTH");
     AddWidget(simpleInstruction);
 
     //repaint widget since we added new geometry

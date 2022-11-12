@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include "Widgets/Iauthoringwidget.h"
+#include "Widgets/Base/Iauthoringwidget.h"
 
 enum MoveMode { WIDGET_MOVE, CONNECTOR_MOVE };
 

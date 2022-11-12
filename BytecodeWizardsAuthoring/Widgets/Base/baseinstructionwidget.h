@@ -32,7 +32,8 @@ public:
 protected:
     QPoint position;
 
-    int HEIGHT = 60;
+    int HEIGHT              = 60;
+    int TITLE_MARGING_TOP   = 20;
 
 private:
     const int WIDTH                 = 120;
@@ -40,7 +41,6 @@ private:
     const int CORNER_RADIUS_X       = 5;
     const int CORNER_RADIUS_Y       = 5;
     const int FONT_SIZE             = 10;
-    const int TITLE_MARGING_TOP     = 20;
     const int CONNECTOR_SIZE        = 8;
     const int CONNECTOR_MARGIN_X    = 0;
     const int CONNECTOR_MARGIN_Y    = 3;

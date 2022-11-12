@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 #include "canvaswidget.h"
-#include "Widgets/IAuthoringWidget.h"
+#include "Widgets/Base/Iauthoringwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class AuthoringWindow; }

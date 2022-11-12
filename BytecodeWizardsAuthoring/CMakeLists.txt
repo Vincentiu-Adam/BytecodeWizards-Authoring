@@ -20,12 +20,12 @@ set(PROJECT_SOURCES
         authoringwindow.cpp
         authoringwindow.h
         authoringwindow.ui
-        Widgets/Iauthoringwidget.h
-        Widgets/simpleinstruction.h Widgets/simpleinstruction.cpp
-        Widgets/valueinstruction.h Widgets/valueinstruction.cpp
-        Widgets/singlevalueinstruction.h Widgets/singlevalueinstruction.cpp
-        Widgets/doublevalueinstruction.h Widgets/doublevalueinstruction.cpp
-        Widgets/baseinstructionwidget.h Widgets/baseinstructionwidget.cpp
+        Widgets/Base/Iauthoringwidget.h
+        Widgets/Base/simpleinstruction.h Widgets/Base/simpleinstruction.cpp
+        Widgets/Base/valueinstruction.h Widgets/Base/valueinstruction.cpp
+        Widgets/Base/singlevalueinstruction.h Widgets/Base/singlevalueinstruction.cpp
+        Widgets/Base/doublevalueinstruction.h Widgets/Base/doublevalueinstruction.cpp
+        Widgets/Base/baseinstructionwidget.h Widgets/Base/baseinstructionwidget.cpp
         Misc/linesegment.h Misc/linesegment.cpp
         canvaswidget.h canvaswidget.cpp
 )

@@ -13,14 +13,13 @@ CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 
 CanvasWidget::~CanvasWidget()
 {
-    IAuthoringWidget* currentWidget = rootWidget;
-    while (currentWidget != NULL)
+    IAuthoringWidget* widget;
+    foreach (widget, widgets)
     {
-        IAuthoringWidget* widgetToDelete = currentWidget;
-        currentWidget = currentWidget->next;
-
-        delete widgetToDelete;
+        delete widget;
     }
+
+    widgets.clear();
 }
 
 void CanvasWidget::AddWidget(IAuthoringWidget* instruction)
@@ -29,18 +28,10 @@ void CanvasWidget::AddWidget(IAuthoringWidget* instruction)
     if (rootWidget == NULL)
     {
         rootWidget = instruction;
-        return;
+        rootWidget->SetRoot();
     }
 
-    IAuthoringWidget* currentWidget = rootWidget, *lastWidget = NULL;
-    while (currentWidget != NULL)
-    {
-        lastWidget = currentWidget;
-        currentWidget = currentWidget->next;
-    }
-
-    //set as next to lastwidget
-    lastWidget->next = instruction;
+    widgets.append(instruction);
 }
 
 IAuthoringWidget* CanvasWidget::GetRootWidget() const
@@ -60,11 +51,10 @@ void CanvasWidget::paintEvent(QPaintEvent *event)
         painter.fillRect(0, 0, width(), height(), whiteBrush);
 
         //paint all the widgets
-        IAuthoringWidget* currentWidget = rootWidget;
-        while (currentWidget != NULL)
+        IAuthoringWidget* widget;
+        foreach (widget, widgets)
         {
-            currentWidget->Draw(painter);
-            currentWidget = currentWidget->next;
+            widget->Draw(painter);
         }
 
     painter.end();
@@ -78,11 +68,14 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
     qDebug("At position %d %d", mousePos.x(), mousePos.y());
 
     //check if we contain some instruction
-    IAuthoringWidget* currentWidget = rootWidget;
 
     bool found = false;
-    while (!found && currentWidget != NULL)
+
+    int i = 0;
+    while (!found && i < widgets.count())
     {
+        IAuthoringWidget* currentWidget = widgets[i];
+
         bool inWidget = currentWidget->Contains(mousePos);
         bool inExitConnector = currentWidget->ContainsExitConnector(mousePos);
 
@@ -99,6 +92,14 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
 
                 //create a line that we will move via mouse cursor
                 selectedWidget->CreateExitConnectorLine();
+
+                //if we have a next widget then we need to remove the entry connector line and reset the next pointer
+                if (selectedWidget->next != NULL)
+                {
+                    selectedWidget->next->SetEntryConnectorLine(NULL);
+                    selectedWidget->next->prev = NULL;
+                    selectedWidget->next = NULL;
+                }
             }
             else
             {
@@ -111,7 +112,7 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
             }
         }
 
-        currentWidget = currentWidget->next;
+        i++;
     }
 }
 
@@ -123,18 +124,32 @@ void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
         QPoint mousePos = event->pos();
 
         //check if we contain some instruction
-        IAuthoringWidget* currentWidget = rootWidget;
-
         bool found = false;
-        while (!found && currentWidget != NULL)
+
+        int i = 0;
+        while (!found && i < widgets.count())
         {
+            IAuthoringWidget* currentWidget = widgets[i];
             found = currentWidget != selectedWidget && currentWidget->ContainsEntryConnector(mousePos);
             if (found)
             {
                 currentWidget->SetEntryConnectorLine(selectedWidget->GetExitConnectorLine());
+                selectedWidget->next = currentWidget;
+
+                //if current widget had an entry already, we need to remove the line for that entry
+                if (currentWidget->prev != NULL)
+                {
+                    currentWidget->prev->SetExitLineEndPos(QPoint(-1,-1));
+                    currentWidget->prev->next = NULL;
+
+                    //line deleted repaint
+                    repaint();
+                }
+
+                currentWidget->prev = selectedWidget;
             }
 
-            currentWidget = currentWidget->next;
+            i++;
         }
 
         //if we did not release on any exit node then just remove the line

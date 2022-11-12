@@ -34,6 +34,8 @@ private:
 
     QPoint widgetSelectionOffset;
 
+    QList<IAuthoringWidget*> widgets;
+
     void AddWidget(IAuthoringWidget* instruction);
 };
 

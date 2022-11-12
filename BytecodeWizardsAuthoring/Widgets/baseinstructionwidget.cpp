@@ -80,7 +80,6 @@ void BaseInstructionWidget::SetEntryConnectorLine(LineSegment* const lineSegment
 
 void BaseInstructionWidget::Move(const QPoint& newPos)
 {
-
     position = newPos;
 
     //widget moved we need to update line pos as well
@@ -105,12 +104,6 @@ void BaseInstructionWidget::SetExitLineEndPos(const QPoint& endPos)
     {
         delete exitLine;
         exitLine = NULL;
-
-        //if we have a next widget, set their entry line to null
-        if (next != NULL)
-        {
-            next->SetEntryConnectorLine(NULL);
-        }
 
         return;
     }
@@ -145,6 +138,7 @@ void BaseInstructionWidget::Draw(QPainter& painter)
     //draw instruction title
     QFont sizedFont = painter.font();
     sizedFont.setPointSize(FONT_SIZE);
+    sizedFont.setBold(isRoot);
 
     painter.setFont(sizedFont);
 

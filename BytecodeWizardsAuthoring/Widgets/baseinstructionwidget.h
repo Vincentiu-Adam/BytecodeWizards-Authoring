@@ -25,6 +25,8 @@ public:
 
     void SetExitLineEndPos(const QPoint& endPos) override;
 
+    void SetRoot() override { isRoot = true; };
+
     inline QPoint GetPosition() const override { return position; };
 
 private:
@@ -38,6 +40,8 @@ private:
     const int CONNECTOR_SIZE        = 8;
     const int CONNECTOR_MARGIN_X    = 0;
     const int CONNECTOR_MARGIN_Y    = 3;
+
+    bool isRoot = false;
 
     QPoint position;
 

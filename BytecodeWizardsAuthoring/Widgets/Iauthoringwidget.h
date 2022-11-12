@@ -10,6 +10,7 @@
 class IAuthoringWidget
 {
 public:
+    IAuthoringWidget* prev = NULL;
     IAuthoringWidget* next = NULL;
 
     virtual void Draw(QPainter& painter) = 0;
@@ -25,6 +26,8 @@ public:
     virtual void SetEntryConnectorLine(LineSegment* const lineSegment) = 0;
 
     virtual LineSegment* GetExitConnectorLine() const = 0;
+
+    virtual void SetRoot() = 0;
 
     virtual QPoint GetPosition() const = 0;
 

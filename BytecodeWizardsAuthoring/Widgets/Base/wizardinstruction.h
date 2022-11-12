@@ -1,14 +1,14 @@
-#ifndef VALUEINSTRUCTION_H
-#define VALUEINSTRUCTION_H
+#ifndef WIZARDINSTRUCTION_H
+#define WIZARDINSTRUCTION_H
 
 #include "baseinstructionwidget.h"
 
 #include <QComboBox>
 
-class ValueInstruction : public BaseInstructionWidget
+class WizardInstruction : public BaseInstructionWidget
 {
 public:
-    ValueInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent);
+    WizardInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent);
 
     void Draw(QPainter& painter) override;
 
@@ -28,4 +28,4 @@ private:
     QComboBox comboBox;
 };
 
-#endif // VALUEINSTRUCTION_H
+#endif // WIZARDINSTRUCTION_H

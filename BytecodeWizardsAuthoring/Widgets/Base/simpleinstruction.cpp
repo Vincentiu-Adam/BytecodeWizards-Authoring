@@ -6,11 +6,6 @@ SimpleInstruction::SimpleInstruction(const QPoint& startPosition, const QString&
     TITLE_MARGING_TOP = 24;
 }
 
-SimpleInstruction::~SimpleInstruction()
-{
-
-}
-
 void SimpleInstruction::Generate(QByteArray& bytecode)
 {
     bytecode.append(0x0A);

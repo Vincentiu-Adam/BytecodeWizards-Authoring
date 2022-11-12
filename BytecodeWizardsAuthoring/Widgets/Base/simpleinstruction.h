@@ -9,7 +9,6 @@ class SimpleInstruction : public BaseInstructionWidget
 {
 public:
     SimpleInstruction(const QPoint& startPosition, const QString& instructionTitle);
-    ~SimpleInstruction() override;
 
     void Generate(QByteArray& bytecode) override;  
 };

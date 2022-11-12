@@ -1,6 +1,6 @@
-#include "valueinstruction.h"
+#include "wizardinstruction.h"
 
-ValueInstruction::ValueInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent) : BaseInstructionWidget(startPosition, instructionTitle)
+WizardInstruction::WizardInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent) : BaseInstructionWidget(startPosition, instructionTitle)
 {
     //create a combo box and set it to 0 and 1
     comboBox.setParent(parent);
@@ -11,12 +11,12 @@ ValueInstruction::ValueInstruction(const QPoint& startPosition, const QString& i
     comboBox.show();
 }
 
-void ValueInstruction::Generate(QByteArray& bytecode)
+void WizardInstruction::Generate(QByteArray& bytecode)
 {
     bytecode.append(0x0B);
 }
 
-void ValueInstruction::Draw(QPainter& painter)
+void WizardInstruction::Draw(QPainter& painter)
 {
     BaseInstructionWidget::Draw(painter);
 

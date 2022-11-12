@@ -5,9 +5,9 @@
 #include <QDragMoveEvent>
 
 #include "Widgets/Base/simpleinstruction.h"
-#include "Widgets/Base/valueinstruction.h"
+#include "Widgets/Base/wizardinstruction.h"
 #include "Widgets/Base/singlevalueinstruction.h"
-#include "Widgets/Base/doublevalueinstruction.h"
+#include "Widgets/Base/singlevaluewizardinstruction.h"
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 {
@@ -221,7 +221,7 @@ void CanvasWidget::onValueInstructionClicked()
 
     QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
 
-    ValueInstruction* valueInstruction = new ValueInstruction(canvasCenter, "GET_WIZARD", this);
+    WizardInstruction* valueInstruction = new WizardInstruction(canvasCenter, "GET_WIZARD", this);
     AddWidget(valueInstruction);
 
     //repaint widget since we added new geometry
@@ -247,8 +247,8 @@ void CanvasWidget::onDoubleValueInstructionClicked()
 
     QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
 
-    DoubleValueInstruction* doubleValueInstruction = new DoubleValueInstruction(canvasCenter, "SET_HEALTH", this);
-    AddWidget(doubleValueInstruction);
+    SingleValueWizardInstruction* singleValueWizardInstruction = new SingleValueWizardInstruction(canvasCenter, "SET_HEALTH", this);
+    AddWidget(singleValueWizardInstruction);
 
     //repaint widget since we added new geometry
     repaint();

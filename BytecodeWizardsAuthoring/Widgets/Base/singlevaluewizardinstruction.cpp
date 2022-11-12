@@ -1,8 +1,8 @@
-#include "doublevalueinstruction.h"
+#include "singlevaluewizardinstruction.h"
 
 #include <QIntValidator>
 
-DoubleValueInstruction::DoubleValueInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent) : ValueInstruction(startPosition, instructionTitle, parent)
+SingleValueWizardInstruction::SingleValueWizardInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent) : WizardInstruction(startPosition, instructionTitle, parent)
 {
     //create a line field with int validator
     lineEdit.setParent(parent);
@@ -20,9 +20,9 @@ DoubleValueInstruction::DoubleValueInstruction(const QPoint& startPosition, cons
     MARGIN_TOP = 0;
 }
 
-void DoubleValueInstruction::Draw(QPainter& painter)
+void SingleValueWizardInstruction::Draw(QPainter& painter)
 {
-    ValueInstruction::Draw(painter);
+    WizardInstruction::Draw(painter);
 
     QPoint widgetCenter = QPoint(position.x(), position.y() + HEIGHT * 0.5f + MARGIN_TOP_TEXT);
 

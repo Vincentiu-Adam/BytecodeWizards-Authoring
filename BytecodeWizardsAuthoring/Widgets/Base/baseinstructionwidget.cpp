@@ -18,12 +18,21 @@ BaseInstructionWidget::~BaseInstructionWidget()
     exitLine = NULL;
     entryLine = NULL;
 
+    //if we have a prev widget, set their exit line to null
+    if (prev != NULL)
+    {
+        prev->SetExitLineEndPos(QPoint(-1,-1));
+        prev->next = NULL;
+    }
+
     //if we have a next widget, set their entry line to null
     if (next != NULL)
     {
         next->SetEntryConnectorLine(NULL);
+        next->prev = NULL;
     }
 
+    prev = NULL;
     next = NULL;
 }
 

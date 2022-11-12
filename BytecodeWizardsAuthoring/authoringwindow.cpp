@@ -14,8 +14,6 @@ AuthoringWindow::AuthoringWindow(QWidget *parent)
     //connect slots
     QObject::connect(ui->simpleInstruction, &QPushButton::clicked, ui->canvas, &CanvasWidget::onSimpleInstructionClicked);
     QObject::connect(ui->setLiteral, &QPushButton::clicked, this, &AuthoringWindow::onGenerate);
-
-
 }
 
 void AuthoringWindow::Generate(IAuthoringWidget* rootWidget)
@@ -33,10 +31,13 @@ void AuthoringWindow::Generate(IAuthoringWidget* rootWidget)
     QString filename = "bytecode.bin";
     QFile file(filename);
 
-    if (file.open(QIODevice::ReadWrite))
+    if (file.open(QIODevice::WriteOnly))
     {
+        file.resize(0); //clear existing contents and write again
         file.write(bytecode);
     }
+
+    qDebug("Generate Done");
 }
 
 void AuthoringWindow::onGenerate()

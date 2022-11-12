@@ -29,9 +29,13 @@ public:
 
     inline QPoint GetPosition() const override { return position; };
 
+protected:
+    QPoint position;
+
+    int HEIGHT = 60;
+
 private:
     const int WIDTH                 = 120;
-    const int HEIGHT                = 60;
     const int BORDER_WIDTH          = 1;
     const int CORNER_RADIUS_X       = 5;
     const int CORNER_RADIUS_Y       = 5;
@@ -43,7 +47,6 @@ private:
 
     bool isRoot = false;
 
-    QPoint position;
 
     QString title;
 

@@ -5,6 +5,9 @@
 #include <QDragMoveEvent>
 
 #include "Widgets/simpleinstruction.h"
+#include "Widgets/valueinstruction.h"
+#include "Widgets/singlevalueinstruction.h"
+#include "Widgets/doublevalueinstruction.h"
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 {
@@ -207,6 +210,45 @@ void CanvasWidget::onSimpleInstructionClicked()
 
     SimpleInstruction* simpleInstruction = new SimpleInstruction(canvasCenter);
     AddWidget(simpleInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onValueInstructionClicked()
+{
+    qDebug("Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    ValueInstruction* valueInstruction = new ValueInstruction(canvasCenter, "GET_WIZARD", this);
+    AddWidget(valueInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onSingleValueInstructionClicked()
+{
+    qDebug("Single Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    SingleValueInstruction* singleValueInstruction = new SingleValueInstruction(canvasCenter, "SET_LITERAL", this);
+    AddWidget(singleValueInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onDoubleValueInstructionClicked()
+{
+    qDebug("Double Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    DoubleValueInstruction* doubleValueInstruction = new DoubleValueInstruction(canvasCenter, "SET_HEALTH", this);
+    AddWidget(doubleValueInstruction);
 
     //repaint widget since we added new geometry
     repaint();

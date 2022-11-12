@@ -22,6 +22,9 @@ set(PROJECT_SOURCES
         authoringwindow.ui
         Widgets/Iauthoringwidget.h
         Widgets/simpleinstruction.h Widgets/simpleinstruction.cpp
+        Widgets/valueinstruction.h Widgets/valueinstruction.cpp
+        Widgets/singlevalueinstruction.h Widgets/singlevalueinstruction.cpp
+        Widgets/doublevalueinstruction.h Widgets/doublevalueinstruction.cpp
         Widgets/baseinstructionwidget.h Widgets/baseinstructionwidget.cpp
         Misc/linesegment.h Misc/linesegment.cpp
         canvaswidget.h canvaswidget.cpp

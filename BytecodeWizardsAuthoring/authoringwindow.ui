@@ -46,6 +46,27 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="valueInstruction">
+        <property name="text">
+         <string>ValueInstruction</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="singleInstruction">
+        <property name="text">
+         <string>SingleInstruction</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="doubleInstruction">
+        <property name="text">
+         <string>DoubleInstruction</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="setLiteral">
         <property name="text">
          <string>SetLiteral</string>

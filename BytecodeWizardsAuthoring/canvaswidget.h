@@ -24,6 +24,9 @@ protected:
 
 public slots:
     void onSimpleInstructionClicked();
+    void onValueInstructionClicked();
+    void onSingleValueInstructionClicked();
+    void onDoubleValueInstructionClicked();
 
 private:
     IAuthoringWidget *rootWidget = NULL;

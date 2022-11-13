@@ -85,6 +85,13 @@ void BaseInstructionWidget::CreateExitConnectorLine()
 void BaseInstructionWidget::SetEntryConnectorLine(LineSegment* const lineSegment)
 {
     entryLine = lineSegment;
+
+    if (entryLine != NULL)
+    {
+        //snap to entry point position
+        QPoint connectorPosition = position + QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5);
+        entryLine->SetEndPoint(connectorPosition);
+    }
 }
 
 void BaseInstructionWidget::Move(const QPoint& newPos)

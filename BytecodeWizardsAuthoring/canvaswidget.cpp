@@ -164,9 +164,6 @@ void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
                 {
                     currentWidget->prev->SetExitLineEndPos(QPoint(-1,-1));
                     currentWidget->prev->next = NULL;
-
-                    //line deleted repaint
-                    repaint();
                 }
 
                 currentWidget->prev = selectedWidget;
@@ -178,10 +175,10 @@ void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
 
                     rootWidget = selectedWidget;
                     selectedWidget->SetRoot();
-
-                    //root updated repaint
-                    repaint();
                 }
+
+                //line snapped to pos repaint
+                repaint();
             }
 
             i++;

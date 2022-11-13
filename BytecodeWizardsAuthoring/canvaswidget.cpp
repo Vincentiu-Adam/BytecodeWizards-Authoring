@@ -191,6 +191,12 @@ void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
 
 void CanvasWidget::mouseMoveEvent(QMouseEvent *event)
 {
+    //ignore event if no focus
+    if (!hasFocus())
+    {
+        return;
+    }
+
     //only gets called when mouse is pressed and held
     qDebug("Mouse moved");
 

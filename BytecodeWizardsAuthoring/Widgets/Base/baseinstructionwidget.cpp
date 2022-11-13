@@ -133,62 +133,76 @@ void BaseInstructionWidget::Draw(QPainter& painter, int drawOrder)
     //draw rounded rect with AA
     painter.setRenderHint(QPainter::Antialiasing);
 
-    //create a path for the rounded rect
-    QPainterPath roundedRectPath;
-    QPoint rectPosition(position.x(), position.y());
-    roundedRectPath.addRoundedRect(rectPosition.x(), rectPosition.y(), WIDTH, HEIGHT, CORNER_RADIUS_X, CORNER_RADIUS_Y);
-
-    QPen blackBorderPen(Qt::black, BORDER_WIDTH);
-    painter.setPen(blackBorderPen);
-
-    painter.fillPath(roundedRectPath, blueRoundedBrush);
-    painter.drawPath(roundedRectPath);
-
-    //draw instruction title
-    QFont sizedFont = painter.font();
-    sizedFont.setPointSize(FONT_SIZE);
-    sizedFont.setBold(isRoot);
-
-    painter.setFont(sizedFont);
-
-    QFontMetrics fontMetrics(sizedFont);
-
-    QPoint textPosition(position.x(), position.y());
-    float textWidth = fontMetrics.size(Qt::TextSingleLine, title).width();
-
-    textPosition += QPoint((WIDTH - textWidth) * 0.5f , TITLE_MARGING_TOP); //offset text
-    painter.drawText(textPosition, title);
-
-    //draw exit line if exists
-    if (exitLine != NULL)
+    //draw lines first in draw order 0
+    switch(drawOrder)
     {
-        exitLine->Draw(painter);
+        case 0:
+        {
+            //draw exit line if exists
+            if (exitLine != NULL)
+            {
+                exitLine->Draw(painter);
+            }
+
+            break;
+        }
+
+        case 1:
+        {
+            //create a path for the rounded rect
+            QPainterPath roundedRectPath;
+            QPoint rectPosition(position.x(), position.y());
+            roundedRectPath.addRoundedRect(rectPosition.x(), rectPosition.y(), WIDTH, HEIGHT, CORNER_RADIUS_X, CORNER_RADIUS_Y);
+
+            QPen blackBorderPen(Qt::black, BORDER_WIDTH);
+            painter.setPen(blackBorderPen);
+
+            painter.fillPath(roundedRectPath, blueRoundedBrush);
+            painter.drawPath(roundedRectPath);
+
+            //draw instruction title
+            QFont sizedFont = painter.font();
+            sizedFont.setPointSize(FONT_SIZE);
+            sizedFont.setBold(isRoot);
+
+            painter.setFont(sizedFont);
+
+            QFontMetrics fontMetrics(sizedFont);
+
+            QPoint textPosition(position.x(), position.y());
+            float textWidth = fontMetrics.size(Qt::TextSingleLine, title).width();
+
+            textPosition += QPoint((WIDTH - textWidth) * 0.5f , TITLE_MARGING_TOP); //offset text
+            painter.drawText(textPosition, title);
+
+            //draw connectors
+            roundedRectPath.clear();
+
+            //make sure to reset pen since draw line might ovewrite
+            painter.setPen(blackBorderPen);
+
+            rectPosition += QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5); //left connector
+            DrawEntryConnectorShape(roundedRectPath, rectPosition);
+
+            //draw entry red
+            blueRoundedBrush.setColor(Qt::red);
+
+            painter.fillPath(roundedRectPath, blueRoundedBrush);
+            painter.drawPath(roundedRectPath);
+
+            roundedRectPath.clear();
+
+            rectPosition += QPoint(WIDTH - CONNECTOR_MARGIN_X * 2, 0); //right connector
+            DrawExitConnectorShape(roundedRectPath, rectPosition);
+
+            blueRoundedBrush.setColor(Qt::gray);
+
+            painter.fillPath(roundedRectPath, blueRoundedBrush);
+            painter.drawPath(roundedRectPath);
+
+            break;
+        }
     }
-
-    //draw connectors
-    roundedRectPath.clear();
-
-    //make sure to reset pen since draw line might ovewrite
-    painter.setPen(blackBorderPen);
-
-    rectPosition += QPoint(CONNECTOR_MARGIN_X + CONNECTOR_SIZE * 0.5, CONNECTOR_MARGIN_Y + HEIGHT * 0.5); //left connector
-    DrawEntryConnectorShape(roundedRectPath, rectPosition);
-
-    //draw entry red
-    blueRoundedBrush.setColor(Qt::red);
-
-    painter.fillPath(roundedRectPath, blueRoundedBrush);
-    painter.drawPath(roundedRectPath);
-
-    roundedRectPath.clear();
-
-    rectPosition += QPoint(WIDTH - CONNECTOR_MARGIN_X * 2, 0); //right connector
-    DrawExitConnectorShape(roundedRectPath, rectPosition);
-
-    blueRoundedBrush.setColor(Qt::gray);
-
-    painter.fillPath(roundedRectPath, blueRoundedBrush);
-    painter.drawPath(roundedRectPath);
 
     //restore original hints
     painter.setRenderHints(previousHints);

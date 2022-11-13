@@ -20,6 +20,12 @@ void WizardInstruction::Draw(QPainter& painter, int drawOrder)
 {
     BaseInstructionWidget::Draw(painter, drawOrder);
 
+    //draw this only on top of lines
+    if (drawOrder == 0)
+    {
+        return;
+    }
+
     QPoint widgetCenter = QPoint(position.x(), position.y() + HEIGHT * 0.5f + MARGIN_TOP);
 
     //write text label

@@ -24,14 +24,16 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 
 public slots:
-    void onSimpleInstructionClicked();
-    void onValueInstructionClicked();
+    void onGetHealthInstructionClicked();
+    void onSetHealthInstructionClicked();
+    void onGetWisdomInstructionClicked();
+    void onSetWisdomInstructionClicked();
     void onSetLiteralInstructionClicked();
     void onAddInstructionClicked();
     void onSubtractInstructionClicked();
     void onMultiplyInstructionClicked();
     void onDivideInstructionClicked();
-    void onDoubleValueInstructionClicked();
+    void onPlayAnimInstructionClicked();
 
 private:
     IAuthoringWidget *rootWidget = NULL;

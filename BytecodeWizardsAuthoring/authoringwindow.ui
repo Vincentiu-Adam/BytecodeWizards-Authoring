@@ -34,6 +34,34 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="getHealth">
+        <property name="text">
+         <string>Get Health</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="setHealth">
+        <property name="text">
+         <string>Set Health</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="getWisdom">
+        <property name="text">
+         <string>Get Wisdom</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="setWisdom">
+        <property name="text">
+         <string>Set Wisdom</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="add">
         <property name="text">
          <string>Add</string>
@@ -62,35 +90,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="simpleInstruction">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
+       <widget class="QPushButton" name="playAnim">
         <property name="text">
-         <string>SimpleInstruction</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="valueInstruction">
-        <property name="text">
-         <string>ValueInstruction</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="doubleInstruction">
-        <property name="text">
-         <string>DoubleInstruction</string>
+         <string>Play Anim</string>
         </property>
        </widget>
       </item>

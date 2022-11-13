@@ -19,6 +19,8 @@ protected:
 
     int MARGIN_TOP = 5;
 
+    inline int GetValue() { return comboBox.currentIndex(); }
+
 private:
     const int       MARGIN_LEFT_TEXT    = 15;
     const int       MARGIN_LEFT_COMBO   = 70;

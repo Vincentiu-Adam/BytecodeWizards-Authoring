@@ -12,6 +12,9 @@ public:
 
     void Draw(QPainter& painter) override;
 
+protected:
+    inline int GetAmountValue() { return lineEdit.text().toInt(); }
+
 private:
     const int       LINE_EDIT_WIDTH         = 32;
     const int       MARGIN_LEFT_TEXT        = 15;

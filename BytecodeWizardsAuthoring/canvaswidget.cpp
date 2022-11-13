@@ -4,14 +4,16 @@
 #include <QMouseEvent>
 #include <QDragMoveEvent>
 
-#include "Widgets/Base/simpleinstruction.h"
-#include "Widgets/Base/wizardinstruction.h"
 #include "Widgets/Instructions/setliteral.h"
 #include "Widgets/Instructions/add.h"
 #include "Widgets/Instructions/subtract.h"
 #include "Widgets/Instructions/multiply.h"
 #include "Widgets/Instructions/divide.h"
-#include "Widgets/Base/singlevaluewizardinstruction.h"
+#include "Widgets/Instructions/gethealth.h"
+#include "Widgets/Instructions/sethealth.h"
+#include "Widgets/Instructions/getwisdom.h"
+#include "Widgets/Instructions/setwisdom.h"
+#include "Widgets/Instructions/playanim.h"
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 {
@@ -242,27 +244,53 @@ void CanvasWidget::keyPressEvent(QKeyEvent *event)
     repaint();
 }
 
-void CanvasWidget::onSimpleInstructionClicked()
-{
-    qDebug("Simple instruction here?");
-
-    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
-
-    SimpleInstruction* simpleInstruction = new SimpleInstruction(canvasCenter, "GET_HEALTH");
-    AddWidget(simpleInstruction);
-
-    //repaint widget since we added new geometry
-    repaint();
-}
-
-void CanvasWidget::onValueInstructionClicked()
+void CanvasWidget::onGetHealthInstructionClicked()
 {
     qDebug("Value instruction here?");
 
     QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
 
-    WizardInstruction* valueInstruction = new WizardInstruction(canvasCenter, "GET_WIZARD", this);
-    AddWidget(valueInstruction);
+    GetHealth* getHealthInstruction = new GetHealth(canvasCenter, this);
+    AddWidget(getHealthInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onSetHealthInstructionClicked()
+{
+    qDebug("Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    SetHealth* setHealthInstruction = new SetHealth(canvasCenter, this);
+    AddWidget(setHealthInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onGetWisdomInstructionClicked()
+{
+    qDebug("Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    GetWisdom* getWisdomInstruction = new GetWisdom(canvasCenter, this);
+    AddWidget(getWisdomInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onSetWisdomInstructionClicked()
+{
+    qDebug("Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    SetWisdom* setWisdomInstruction = new SetWisdom(canvasCenter, this);
+    AddWidget(setWisdomInstruction);
 
     //repaint widget since we added new geometry
     repaint();
@@ -333,14 +361,14 @@ void CanvasWidget::onDivideInstructionClicked()
     repaint();
 }
 
-void CanvasWidget::onDoubleValueInstructionClicked()
+void CanvasWidget::onPlayAnimInstructionClicked()
 {
     qDebug("Double Value instruction here?");
 
     QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
 
-    SingleValueWizardInstruction* singleValueWizardInstruction = new SingleValueWizardInstruction(canvasCenter, "SET_HEALTH", this);
-    AddWidget(singleValueWizardInstruction);
+    PlayAnim* playAnimInstruction = new PlayAnim(canvasCenter, this);
+    AddWidget(playAnimInstruction);
 
     //repaint widget since we added new geometry
     repaint();

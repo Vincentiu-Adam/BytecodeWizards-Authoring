@@ -31,6 +31,11 @@ set(PROJECT_SOURCES
         Widgets/Instructions/subtract.h Widgets/Instructions/subtract.cpp
         Widgets/Instructions/multiply.h Widgets/Instructions/multiply.cpp
         Widgets/Instructions/divide.h Widgets/Instructions/divide.cpp
+        Widgets/Instructions/gethealth.h Widgets/Instructions/gethealth.cpp
+        Widgets/Instructions/sethealth.h Widgets/Instructions/sethealth.cpp
+        Widgets/Instructions/getwisdom.h Widgets/Instructions/getwisdom.cpp
+        Widgets/Instructions/setwisdom.h Widgets/Instructions/setwisdom.cpp
+        Widgets/Instructions/playanim.h Widgets/Instructions/playanim.cpp
         Misc/linesegment.h Misc/linesegment.cpp
         canvaswidget.h canvaswidget.cpp
 )

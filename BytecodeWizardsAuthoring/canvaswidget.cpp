@@ -160,6 +160,18 @@ void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
                 }
 
                 currentWidget->prev = selectedWidget;
+
+                //if current widget is root then we change with new root
+                if (currentWidget == rootWidget)
+                {
+                    currentWidget->ResetRoot();
+
+                    rootWidget = selectedWidget;
+                    selectedWidget->SetRoot();
+
+                    //root updated repaint
+                    repaint();
+                }
             }
 
             i++;

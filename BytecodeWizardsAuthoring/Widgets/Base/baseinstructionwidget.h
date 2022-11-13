@@ -27,6 +27,7 @@ public:
     void SetExitLineEndPos(const QPoint& endPos) override;
 
     void SetRoot() override { isRoot = true; };
+    void ResetRoot() override { isRoot = false; };
 
     inline QPoint GetPosition() const override { return position; };
 

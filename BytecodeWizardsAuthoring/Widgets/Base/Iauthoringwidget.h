@@ -28,6 +28,7 @@ public:
     virtual LineSegment* GetExitConnectorLine() const = 0;
 
     virtual void SetRoot() = 0;
+    virtual void ResetRoot() = 0;
 
     virtual QPoint GetPosition() const = 0;
 

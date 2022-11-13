@@ -161,11 +161,17 @@ void BaseInstructionWidget::Draw(QPainter& painter, int drawOrder)
             QPoint rectPosition(position.x(), position.y());
             roundedRectPath.addRoundedRect(rectPosition.x(), rectPosition.y(), WIDTH, HEIGHT, CORNER_RADIUS_X, CORNER_RADIUS_Y);
 
-            QPen blackBorderPen(Qt::black, BORDER_WIDTH);
+            int borderWidth = isSelected ? BORDER_WIDTH + 1 : BORDER_WIDTH;
+
+            QPen blackBorderPen(Qt::black, borderWidth);
             painter.setPen(blackBorderPen);
 
             painter.fillPath(roundedRectPath, blueRoundedBrush);
             painter.drawPath(roundedRectPath);
+
+            //normal width onwards
+            blackBorderPen.setWidth(BORDER_WIDTH);
+            painter.setPen(blackBorderPen);
 
             //draw instruction title
             QFont sizedFont = painter.font();

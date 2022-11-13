@@ -87,11 +87,16 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
     QPoint mousePos = event->pos();
     qDebug("At position %d %d", mousePos.x(), mousePos.y());
 
+    //if we had a previous selection deselect
+    if (selectedWidget != NULL)
+    {
+        selectedWidget->Deselect();
+    }
+
     //reset selection on mouse press
     selectedWidget = NULL;
 
     //check if we contain some instruction
-
     bool found = false;
 
     int i = 0;
@@ -106,6 +111,7 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
         if (found)
         {
             selectedWidget = currentWidget;
+            selectedWidget->Select();
 
             //check if we didn't click on the exit connector instead
             if (inExitConnector)
@@ -137,6 +143,9 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
 
         i++;
     }
+
+    //selection update repaint
+    repaint();
 }
 
 void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)

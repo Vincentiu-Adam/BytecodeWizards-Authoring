@@ -26,8 +26,11 @@ public:
 
     void SetExitLineEndPos(const QPoint& endPos) override;
 
-    void SetRoot() override { isRoot = true; };
-    void ResetRoot() override { isRoot = false; };
+    inline void SetRoot() override { isRoot = true; };
+    inline void ResetRoot() override { isRoot = false; };
+
+    inline void Select() override { isSelected = true; };
+    inline void Deselect() override { isSelected = false; };
 
     inline QPoint GetPosition() const override { return position; };
 
@@ -47,8 +50,8 @@ private:
     const int CONNECTOR_MARGIN_X    = 0;
     const int CONNECTOR_MARGIN_Y    = 3;
 
-    bool isRoot = false;
-
+    bool isRoot     = false;
+    bool isSelected = false;
 
     QString title;
 

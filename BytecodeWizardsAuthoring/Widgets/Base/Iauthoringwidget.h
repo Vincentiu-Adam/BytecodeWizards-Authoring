@@ -30,6 +30,9 @@ public:
     virtual void SetRoot() = 0;
     virtual void ResetRoot() = 0;
 
+    virtual void Select() = 0;
+    virtual void Deselect() = 0;
+
     virtual QPoint GetPosition() const = 0;
 
     virtual void SetExitLineEndPos(const QPoint& endPos) = 0;

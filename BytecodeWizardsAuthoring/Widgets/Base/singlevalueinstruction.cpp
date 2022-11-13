@@ -45,6 +45,11 @@ void SingleValueInstruction::Draw(QPainter& painter)
 
 void SingleValueInstruction::Validate(const QString &text)
 {
+    if (text.isEmpty())
+    {
+        return;
+    }
+
     int value = text.toInt();
 
     //clamp and set back to line edit

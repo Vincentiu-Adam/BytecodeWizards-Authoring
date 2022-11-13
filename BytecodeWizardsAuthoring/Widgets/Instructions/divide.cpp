@@ -7,13 +7,16 @@ Divide::Divide(const QPoint& startPosition, QWidget* const parent) : SingleValue
 
 void Divide::Generate(QByteArray& bytecode)
 {
-    //set literal instruction first
-    bytecode.append(0xC0);
+    if (!IsEmpty())
+    {
+        //set literal instruction first
+        bytecode.append(0xC0);
 
-    //append value
-    int literalValue = GetValue();
-    bytecode.append(literalValue);
+        //append value
+        int literalValue = GetValue();
+        bytecode.append(literalValue);
+    }
 
-    //set add
+    //set divide
     bytecode.append(0xC8);
 }

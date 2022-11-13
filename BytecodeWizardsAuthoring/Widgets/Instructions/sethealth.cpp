@@ -14,6 +14,5 @@ void SetHealth::Generate(QByteArray& bytecode)
     int literalValue = GetValue();
     bytecode.append(literalValue);
 
-    //set add
     bytecode.append(0xC2);
 }

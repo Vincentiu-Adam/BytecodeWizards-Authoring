@@ -7,13 +7,16 @@ Subtract::Subtract(const QPoint& startPosition, QWidget* const parent) : SingleV
 
 void Subtract::Generate(QByteArray& bytecode)
 {
-    //set literal instruction first
-    bytecode.append(0xC0);
+    if (!IsEmpty())
+    {
+        //set literal instruction first
+        bytecode.append(0xC0);
 
-    //append value
-    int literalValue = GetValue();
-    bytecode.append(literalValue);
+        //append value
+        int literalValue = GetValue();
+        bytecode.append(literalValue);
+    }
 
-    //set add
+    //set subtract
     bytecode.append(0xC6);
 }

@@ -16,6 +16,7 @@ public:
 
 protected:
     inline int GetValue() { return lineEdit.text().toInt(); }
+    inline bool IsEmpty() { return lineEdit.text().isEmpty(); }
 
 private:
     const int       FONT_SIZE               = 8;

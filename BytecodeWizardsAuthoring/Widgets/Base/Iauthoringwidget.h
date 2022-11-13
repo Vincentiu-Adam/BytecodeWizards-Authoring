@@ -13,7 +13,7 @@ public:
     IAuthoringWidget* prev = NULL;
     IAuthoringWidget* next = NULL;
 
-    virtual void Draw(QPainter& painter) = 0;
+    virtual void Draw(QPainter& painter, int drawOrder) = 0;
     virtual void Generate(QByteArray& bytecode) = 0;
 
     virtual bool Contains(const QPoint& pos) = 0;

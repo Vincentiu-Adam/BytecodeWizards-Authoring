@@ -10,7 +10,7 @@ class SingleValueWizardInstruction : public WizardInstruction
 public:
     SingleValueWizardInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent);
 
-    void Draw(QPainter& painter) override;
+    void Draw(QPainter& painter, int drawOrder) override;
 
 protected:
     QString AMOUNT_TEXT = "Amount :";

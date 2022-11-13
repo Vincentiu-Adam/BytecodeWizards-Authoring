@@ -12,7 +12,7 @@ class SingleValueInstruction : public QObject, public BaseInstructionWidget
 public:
     SingleValueInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent);
 
-    void Draw(QPainter& painter) override;
+    void Draw(QPainter& painter, int drawOrder) override;
 
 protected:
     inline int GetValue() { return lineEdit.text().toInt(); }

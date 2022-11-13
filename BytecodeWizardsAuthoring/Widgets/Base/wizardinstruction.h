@@ -10,7 +10,7 @@ class WizardInstruction : public BaseInstructionWidget
 public:
     WizardInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent);
 
-    void Draw(QPainter& painter) override;
+    void Draw(QPainter& painter, int drawOrder) override;
 
     void Generate(QByteArray& bytecode) override;
 

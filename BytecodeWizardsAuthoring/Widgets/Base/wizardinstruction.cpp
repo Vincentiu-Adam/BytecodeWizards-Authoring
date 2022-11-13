@@ -16,9 +16,9 @@ void WizardInstruction::Generate(QByteArray& bytecode)
     bytecode.append(0x0B);
 }
 
-void WizardInstruction::Draw(QPainter& painter)
+void WizardInstruction::Draw(QPainter& painter, int drawOrder)
 {
-    BaseInstructionWidget::Draw(painter);
+    BaseInstructionWidget::Draw(painter, drawOrder);
 
     QPoint widgetCenter = QPoint(position.x(), position.y() + HEIGHT * 0.5f + MARGIN_TOP);
 

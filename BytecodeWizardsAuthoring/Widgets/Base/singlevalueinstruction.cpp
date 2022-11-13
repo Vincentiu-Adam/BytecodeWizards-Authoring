@@ -18,9 +18,9 @@ SingleValueInstruction::SingleValueInstruction(const QPoint& startPosition, cons
     QObject::connect(&lineEdit, &QLineEdit::textChanged, this, &SingleValueInstruction::Validate);
 }
 
-void SingleValueInstruction::Draw(QPainter& painter)
+void SingleValueInstruction::Draw(QPainter& painter, int drawOrder)
 {
-    BaseInstructionWidget::Draw(painter);
+    BaseInstructionWidget::Draw(painter, drawOrder);
 
     QPoint widgetCenter = QPoint(position.x(), position.y() + HEIGHT * 0.5f + MARGIN_TOP);
 

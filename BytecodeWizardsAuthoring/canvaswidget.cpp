@@ -63,9 +63,18 @@ void CanvasWidget::paintEvent(QPaintEvent *event)
 
         //paint all the widgets
         IAuthoringWidget* widget;
+
+        //have 2 draw orders; 1 for lines, 1 for graphics
         foreach (widget, widgets)
         {
-            widget->Draw(painter);
+            //draw lines on the bottom
+            widget->Draw(painter, 0);
+        }
+
+        foreach (widget, widgets)
+        {
+            //draw graphics on top
+            widget->Draw(painter, 1);
         }
 
     painter.end();

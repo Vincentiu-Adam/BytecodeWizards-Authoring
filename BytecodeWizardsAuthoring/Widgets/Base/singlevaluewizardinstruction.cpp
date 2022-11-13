@@ -20,9 +20,9 @@ SingleValueWizardInstruction::SingleValueWizardInstruction(const QPoint& startPo
     MARGIN_TOP = 0;
 }
 
-void SingleValueWizardInstruction::Draw(QPainter& painter)
+void SingleValueWizardInstruction::Draw(QPainter& painter, int drawOrder)
 {
-    WizardInstruction::Draw(painter);
+    WizardInstruction::Draw(painter, drawOrder);
 
     QPoint widgetCenter = QPoint(position.x(), position.y() + HEIGHT * 0.5f + MARGIN_TOP_TEXT);
 

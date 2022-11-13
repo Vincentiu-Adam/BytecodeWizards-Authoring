@@ -120,7 +120,7 @@ void BaseInstructionWidget::SetExitLineEndPos(const QPoint& endPos)
     exitLine->SetEndPoint(endPos);
 }
 
-void BaseInstructionWidget::Draw(QPainter& painter)
+void BaseInstructionWidget::Draw(QPainter& painter, int drawOrder)
 {
     //use painter to draw a rect at pos
     QColor cyanTransparent = Qt::cyan;

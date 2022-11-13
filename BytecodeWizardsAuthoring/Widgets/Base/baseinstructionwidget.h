@@ -11,7 +11,7 @@ public:
     BaseInstructionWidget(const QPoint& startPosition, const QString& instructionTitle);
     ~BaseInstructionWidget();
 
-    virtual void Draw(QPainter& painter) override;
+    virtual void Draw(QPainter& painter, int drawOrder) override;
 
     bool Contains(const QPoint& pos) override;
     bool ContainsEntryConnector(const QPoint& pos) override;

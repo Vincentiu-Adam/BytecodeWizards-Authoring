@@ -11,7 +11,8 @@
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 {
-
+    //accept key events through click focus
+    setFocusPolicy(Qt::ClickFocus);
 }
 
 CanvasWidget::~CanvasWidget()
@@ -69,6 +70,9 @@ void CanvasWidget::mousePressEvent(QMouseEvent *event)
 
     QPoint mousePos = event->pos();
     qDebug("At position %d %d", mousePos.x(), mousePos.y());
+
+    //reset selection on mouse press
+    selectedWidget = NULL;
 
     //check if we contain some instruction
 
@@ -164,9 +168,6 @@ void CanvasWidget::mouseReleaseEvent(QMouseEvent *event)
             repaint();
         }
     }
-
-    //released mouse; release widget
-    selectedWidget = NULL;
 }
 
 void CanvasWidget::mouseMoveEvent(QMouseEvent *event)
@@ -200,6 +201,41 @@ void CanvasWidget::mouseMoveEvent(QMouseEvent *event)
         //widget moved repaint
         repaint();
     }
+}
+
+void CanvasWidget::keyPressEvent(QKeyEvent *event)
+{
+    qDebug("Key pressed %d", event->key());
+    qDebug("Delete key %d", Qt::Key_Delete);
+
+    if (event->key() != Qt::Key_Delete || selectedWidget == NULL)
+    {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    //delete selected widget
+    widgets.removeOne(selectedWidget);
+
+    //if root widget; set next or first as root widget or null if next is null
+    if (rootWidget == selectedWidget)
+    {
+        rootWidget = selectedWidget->next;
+        if (rootWidget == NULL && widgets.count() > 0)
+        {
+            rootWidget = widgets[0];
+        }
+
+        if (rootWidget != NULL)
+        {
+            rootWidget->SetRoot();
+        }
+    }
+
+    delete selectedWidget;
+
+    //widget deleted repaint
+    repaint();
 }
 
 void CanvasWidget::onSimpleInstructionClicked()

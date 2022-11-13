@@ -26,7 +26,11 @@ protected:
 public slots:
     void onSimpleInstructionClicked();
     void onValueInstructionClicked();
-    void onSingleValueInstructionClicked();
+    void onSetLiteralInstructionClicked();
+    void onAddInstructionClicked();
+    void onSubtractInstructionClicked();
+    void onMultiplyInstructionClicked();
+    void onDivideInstructionClicked();
     void onDoubleValueInstructionClicked();
 
 private:

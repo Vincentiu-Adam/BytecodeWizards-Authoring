@@ -6,6 +6,7 @@
 
 class BaseInstructionWidget : public IAuthoringWidget
 {
+
 public:
     BaseInstructionWidget(const QPoint& startPosition, const QString& instructionTitle);
     ~BaseInstructionWidget();

@@ -10,7 +10,7 @@ SingleValueWizardInstruction::SingleValueWizardInstruction(const QPoint& startPo
     lineEdit.setMinimumWidth(LINE_EDIT_WIDTH);
     lineEdit.setMaximumWidth(LINE_EDIT_WIDTH);
 
-    QValidator *validator = new QIntValidator(100, 999, parent);
+    QValidator *validator = new QIntValidator(0, 255, parent);
     lineEdit.setValidator(validator);
 
     lineEdit.show();

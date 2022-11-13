@@ -5,14 +5,17 @@
 
 #include <QLineEdit>
 
-class SingleValueInstruction : public BaseInstructionWidget
+class SingleValueInstruction : public QObject, public BaseInstructionWidget
 {
+    Q_OBJECT
+
 public:
     SingleValueInstruction(const QPoint& startPosition, const QString& instructionTitle, QWidget* const parent);
 
     void Draw(QPainter& painter) override;
 
-    void Generate(QByteArray& bytecode) override;
+protected:
+    inline int GetValue() { return lineEdit.text().toInt(); }
 
 private:
     const int       FONT_SIZE               = 8;
@@ -24,6 +27,9 @@ private:
     const QString   AMOUNT_TEXT             = "Amount :";
 
     QLineEdit lineEdit;
+
+private slots:
+    void Validate(const QString &text);
 };
 
 #endif // SINGLEVALUEINSTRUCTION_H

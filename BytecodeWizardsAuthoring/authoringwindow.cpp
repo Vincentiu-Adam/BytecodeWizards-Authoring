@@ -14,9 +14,13 @@ AuthoringWindow::AuthoringWindow(QWidget *parent)
     //connect slots
     QObject::connect(ui->simpleInstruction, &QPushButton::clicked, ui->canvas, &CanvasWidget::onSimpleInstructionClicked);
     QObject::connect(ui->valueInstruction, &QPushButton::clicked, ui->canvas, &CanvasWidget::onValueInstructionClicked);
-    QObject::connect(ui->singleInstruction, &QPushButton::clicked, ui->canvas, &CanvasWidget::onSingleValueInstructionClicked);
+    QObject::connect(ui->setLiteral, &QPushButton::clicked, ui->canvas, &CanvasWidget::onSetLiteralInstructionClicked);
+    QObject::connect(ui->add, &QPushButton::clicked, ui->canvas, &CanvasWidget::onAddInstructionClicked);
+    QObject::connect(ui->subtract, &QPushButton::clicked, ui->canvas, &CanvasWidget::onSubtractInstructionClicked);
+    QObject::connect(ui->multiply, &QPushButton::clicked, ui->canvas, &CanvasWidget::onMultiplyInstructionClicked);
+    QObject::connect(ui->divide, &QPushButton::clicked, ui->canvas, &CanvasWidget::onDivideInstructionClicked);
     QObject::connect(ui->doubleInstruction, &QPushButton::clicked, ui->canvas, &CanvasWidget::onDoubleValueInstructionClicked);
-    QObject::connect(ui->setLiteral, &QPushButton::clicked, this, &AuthoringWindow::onGenerate);
+    QObject::connect(ui->generate, &QPushButton::clicked, this, &AuthoringWindow::onGenerate);
 }
 
 void AuthoringWindow::Generate(IAuthoringWidget* rootWidget)

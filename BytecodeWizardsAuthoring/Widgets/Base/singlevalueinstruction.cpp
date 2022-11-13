@@ -10,15 +10,12 @@ SingleValueInstruction::SingleValueInstruction(const QPoint& startPosition, cons
     lineEdit.setMinimumWidth(LINE_EDIT_WIDTH);
     lineEdit.setMaximumWidth(LINE_EDIT_WIDTH);
 
-    QValidator *validator = new QIntValidator(100, 999, parent);
+    QValidator *validator = new QIntValidator(0, 255, parent);
     lineEdit.setValidator(validator);
 
     lineEdit.show();
-}
 
-void SingleValueInstruction::Generate(QByteArray& bytecode)
-{
-
+    QObject::connect(&lineEdit, &QLineEdit::textChanged, this, &SingleValueInstruction::Validate);
 }
 
 void SingleValueInstruction::Draw(QPainter& painter)
@@ -44,4 +41,13 @@ void SingleValueInstruction::Draw(QPainter& painter)
 
     widgetCenter += QPoint(MARGIN_LEFT_LINE_EDIT, -lineEdit.height() * 0.5f + MARGIN_TOP_LINE_EDIT);
     lineEdit.move(widgetCenter);
+}
+
+void SingleValueInstruction::Validate(const QString &text)
+{
+    int value = text.toInt();
+
+    //clamp and set back to line edit
+    value = qBound(0, value, 255);
+    lineEdit.setText(QString::number(value));
 }

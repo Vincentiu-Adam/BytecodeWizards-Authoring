@@ -27,6 +27,41 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QPushButton" name="setLiteral">
+        <property name="text">
+         <string>Set Literal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="add">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="subtract">
+        <property name="text">
+         <string>Subtract</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="multiply">
+        <property name="text">
+         <string>Multiply</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="divide">
+        <property name="text">
+         <string>Divide</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="simpleInstruction">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -53,13 +88,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="singleInstruction">
-        <property name="text">
-         <string>SingleInstruction</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="doubleInstruction">
         <property name="text">
          <string>DoubleInstruction</string>
@@ -67,9 +95,19 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="setLiteral">
+       <widget class="QPushButton" name="generate">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;
+background:red</string>
+        </property>
         <property name="text">
-         <string>SetLiteral</string>
+         <string>Generate</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </item>

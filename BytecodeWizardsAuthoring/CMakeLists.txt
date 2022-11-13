@@ -26,6 +26,11 @@ set(PROJECT_SOURCES
         Widgets/Base/singlevalueinstruction.h Widgets/Base/singlevalueinstruction.cpp
         Widgets/Base/singlevaluewizardinstruction.h Widgets/Base/singlevaluewizardinstruction.cpp
         Widgets/Base/baseinstructionwidget.h Widgets/Base/baseinstructionwidget.cpp
+        Widgets/Instructions/setliteral.h Widgets/Instructions/setliteral.cpp
+        Widgets/Instructions/add.h Widgets/Instructions/add.cpp
+        Widgets/Instructions/subtract.h Widgets/Instructions/subtract.cpp
+        Widgets/Instructions/multiply.h Widgets/Instructions/multiply.cpp
+        Widgets/Instructions/divide.h Widgets/Instructions/divide.cpp
         Misc/linesegment.h Misc/linesegment.cpp
         canvaswidget.h canvaswidget.cpp
 )

@@ -6,7 +6,11 @@
 
 #include "Widgets/Base/simpleinstruction.h"
 #include "Widgets/Base/wizardinstruction.h"
-#include "Widgets/Base/singlevalueinstruction.h"
+#include "Widgets/Instructions/setliteral.h"
+#include "Widgets/Instructions/add.h"
+#include "Widgets/Instructions/subtract.h"
+#include "Widgets/Instructions/multiply.h"
+#include "Widgets/Instructions/divide.h"
 #include "Widgets/Base/singlevaluewizardinstruction.h"
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
@@ -264,14 +268,66 @@ void CanvasWidget::onValueInstructionClicked()
     repaint();
 }
 
-void CanvasWidget::onSingleValueInstructionClicked()
+void CanvasWidget::onSetLiteralInstructionClicked()
 {
     qDebug("Single Value instruction here?");
 
     QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
 
-    SingleValueInstruction* singleValueInstruction = new SingleValueInstruction(canvasCenter, "SET_LITERAL", this);
-    AddWidget(singleValueInstruction);
+    SetLiteral* setLiteralInstruction = new SetLiteral(canvasCenter, this);
+    AddWidget(setLiteralInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onAddInstructionClicked()
+{
+    qDebug("Single Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    Add* addInstruction = new Add(canvasCenter, this);
+    AddWidget(addInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onSubtractInstructionClicked()
+{
+    qDebug("Single Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    Subtract* subtractInstruction = new Subtract(canvasCenter, this);
+    AddWidget(subtractInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onMultiplyInstructionClicked()
+{
+    qDebug("Single Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    Multiply* multiplyInstruction = new Multiply(canvasCenter, this);
+    AddWidget(multiplyInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onDivideInstructionClicked()
+{
+    qDebug("Single Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    Divide* divideInstruction = new Divide(canvasCenter, this);
+    AddWidget(divideInstruction);
 
     //repaint widget since we added new geometry
     repaint();

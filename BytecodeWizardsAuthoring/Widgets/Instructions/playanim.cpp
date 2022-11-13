@@ -2,7 +2,7 @@
 
 PlayAnim::PlayAnim(const QPoint& startPosition, QWidget* const parent) : SingleValueWizardInstruction(startPosition, "PLAY_ANIM", parent)
 {
-
+    AMOUNT_TEXT = "Anim :";
 }
 
 void PlayAnim::Generate(QByteArray& bytecode)

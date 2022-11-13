@@ -13,6 +13,8 @@ public:
     void Draw(QPainter& painter) override;
 
 protected:
+    QString AMOUNT_TEXT = "Amount :";
+
     inline int GetAmountValue() { return lineEdit.text().toInt(); }
 
 private:
@@ -21,7 +23,6 @@ private:
     const int       MARGIN_LEFT_LINE_EDIT   = 70;
     const int       MARGIN_TOP_TEXT         = 24;
     const int       MARGIN_TOP_LINE_EDIT    = 2;
-    const QString   AMOUNT_TEXT             = "Amount :";
 
     QLineEdit lineEdit;
 };

@@ -34,6 +34,7 @@ public slots:
     void onMultiplyInstructionClicked();
     void onDivideInstructionClicked();
     void onPlayAnimInstructionClicked();
+    void onPlayVFXInstructionClicked();
 
 private:
     IAuthoringWidget *rootWidget = NULL;

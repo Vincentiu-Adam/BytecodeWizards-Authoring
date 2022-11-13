@@ -14,6 +14,7 @@
 #include "Widgets/Instructions/getwisdom.h"
 #include "Widgets/Instructions/setwisdom.h"
 #include "Widgets/Instructions/playanim.h"
+#include "Widgets/Instructions/playvfx.h"
 
 CanvasWidget::CanvasWidget(QWidget *parent) : QWidget{parent}
 {
@@ -381,6 +382,19 @@ void CanvasWidget::onPlayAnimInstructionClicked()
 
     PlayAnim* playAnimInstruction = new PlayAnim(canvasCenter, this);
     AddWidget(playAnimInstruction);
+
+    //repaint widget since we added new geometry
+    repaint();
+}
+
+void CanvasWidget::onPlayVFXInstructionClicked()
+{
+    qDebug("Double Value instruction here?");
+
+    QPoint canvasCenter(width() * 0.5f, height() * 0.5f);
+
+    PlayVFX* playVFXInstruction = new PlayVFX(canvasCenter, this);
+    AddWidget(playVFXInstruction);
 
     //repaint widget since we added new geometry
     repaint();

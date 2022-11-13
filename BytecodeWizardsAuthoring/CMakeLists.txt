@@ -36,6 +36,7 @@ set(PROJECT_SOURCES
         Widgets/Instructions/getwisdom.h Widgets/Instructions/getwisdom.cpp
         Widgets/Instructions/setwisdom.h Widgets/Instructions/setwisdom.cpp
         Widgets/Instructions/playanim.h Widgets/Instructions/playanim.cpp
+        Widgets/Instructions/playvfx.h Widgets/Instructions/playvfx.cpp
         Misc/linesegment.h Misc/linesegment.cpp
         canvaswidget.h canvaswidget.cpp
 )

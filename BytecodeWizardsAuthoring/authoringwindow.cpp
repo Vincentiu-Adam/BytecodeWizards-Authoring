@@ -23,6 +23,7 @@ AuthoringWindow::AuthoringWindow(QWidget *parent)
     QObject::connect(ui->multiply, &QPushButton::clicked, ui->canvas, &CanvasWidget::onMultiplyInstructionClicked);
     QObject::connect(ui->divide, &QPushButton::clicked, ui->canvas, &CanvasWidget::onDivideInstructionClicked);
     QObject::connect(ui->playAnim, &QPushButton::clicked, ui->canvas, &CanvasWidget::onPlayAnimInstructionClicked);
+    QObject::connect(ui->playVFX, &QPushButton::clicked, ui->canvas, &CanvasWidget::onPlayVFXInstructionClicked);
     QObject::connect(ui->generate, &QPushButton::clicked, this, &AuthoringWindow::onGenerate);
 }
 

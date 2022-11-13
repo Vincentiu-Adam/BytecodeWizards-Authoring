@@ -7,18 +7,18 @@ PlayAnim::PlayAnim(const QPoint& startPosition, QWidget* const parent) : SingleV
 
 void PlayAnim::Generate(QByteArray& bytecode)
 {
-    //set wizard ID first
-    bytecode.append(0xC0);
-
-    //append value
-    int wizardIDValue = GetValue();
-    bytecode.append(wizardIDValue);
-
     bytecode.append(0xC0);
 
     //set animation value
     int animationValue = GetAmountValue();
     bytecode.append(animationValue);
+
+    //set wizard ID
+    bytecode.append(0xC0);
+
+    //append value
+    int wizardIDValue = GetValue();
+    bytecode.append(wizardIDValue);
 
     //set add
     bytecode.append(0xC9);

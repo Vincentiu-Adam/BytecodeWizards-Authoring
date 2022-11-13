@@ -273,6 +273,7 @@ void CanvasWidget::keyPressEvent(QKeyEvent *event)
     }
 
     delete selectedWidget;
+    selectedWidget = NULL;
 
     //widget deleted repaint
     repaint();

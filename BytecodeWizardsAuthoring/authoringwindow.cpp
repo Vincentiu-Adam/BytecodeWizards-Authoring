@@ -2,6 +2,7 @@
 #include "./ui_authoringwindow.h"
 
 #include <QFile>
+#include <QFileDialog>
 
 AuthoringWindow::AuthoringWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -37,7 +38,12 @@ void AuthoringWindow::Generate(IAuthoringWidget* rootWidget)
         currentWidget = currentWidget->next;
     }
 
-    QString filename = "bytecode.bin";
+    QString filename = QFileDialog::getSaveFileName(this, tr("Save Spell"), "", tr("Spell Files (*.bin)"));
+    if (filename.isEmpty())
+    {
+        filename = "bytecode.bin";
+    }
+
     QFile file(filename);
 
     if (file.open(QIODevice::WriteOnly))
